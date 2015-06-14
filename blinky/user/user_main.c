@@ -25,6 +25,8 @@ void some_timerfunc(void *arg)
         //Set GPIO2 to HIGH
         gpio_output_set(BIT2, 0, BIT2, 0);
     }
+
+    os_printf("blink\n");
 }
 
 //Do nothing function
@@ -38,6 +40,9 @@ user_procTask(os_event_t *events)
 void ICACHE_FLASH_ATTR
 user_init()
 {
+    uart_div_modify(0, UART_CLK_FREQ / 9600);
+    os_printf("Hello, world!\n");
+
     // Initialize the GPIO subsystem.
     gpio_init();
 
